@@ -135,15 +135,15 @@ _post-process-linkml-schema:
     @echo "Copying source files to artifacts directory…"
     @echo
     mkdir -p "artifacts/information_models"
-    cp "information_models/dp_meetdata.schema.linkml.yml" "artifacts/information_models/"
+    cp "information_models/schema.linkml.yml" "artifacts/information_models/"
     @echo
     @echo "Setting version in LinkML schema…"
     @echo
-    sed -i '/^version: .*$/d' "artifacts/information_models/dp_meetdata.schema.linkml.yml"
+    sed -i '/^version: .*$/d' "artifacts/information_models/schema.linkml.yml"
     @if [ -z ${VERSION:-} ]; then \
-        sed -i "/^name: .*$/a version: {{shell(ref_name)}}" "artifacts/information_models/dp_meetdata.schema.linkml.yml"; \
+        sed -i "/^name: .*$/a version: {{shell(ref_name)}}" "artifacts/information_models/schema.linkml.yml"; \
     else \
-        sed -i "/^name: .*$/a version: ${VERSION}" "artifacts/information_models/dp_meetdata.schema.linkml.yml"; \
+        sed -i "/^name: .*$/a version: ${VERSION}" "artifacts/information_models/schema.linkml.yml"; \
     fi
     @echo "… OK."
     @echo
@@ -151,17 +151,17 @@ _post-process-linkml-schema:
 # Edit the schema
 [group("schema")]
 edit-schema:
-    @${VISUAL:-${EDITOR:-nano}} information_models/dp_meetdata.schema.linkml.yml
+    @${VISUAL:-${EDITOR:-nano}} information_models/schema.linkml.yml
 
 # Show definition of the class identified by the provided CURIE
 [group("schema")]
 get-definition curie:
-    yq '.classes.* | select(.class_uri == "{{curie}}")' information_models/dp_meetdata.schema.linkml.yml
+    yq '.classes.* | select(.class_uri == "{{curie}}")' information_models/schema.linkml.yml
 
 # List all classes in the schema
 [group("schema")]
 list-classes:
-    yq '.classes.* | key' information_models/dp_meetdata.schema.linkml.yml
+    yq '.classes.* | key' information_models/schema.linkml.yml
 
 # Create new draft
 [group("version-control")]
@@ -243,8 +243,8 @@ generate-documentation: _post-process-linkml-schema
     @echo
     cp -r "documentation" "artifacts"
     mkdir -p "artifacts/documentation/modules/schema"
-    poetry run python -m linkml_asciidoc_generator.main \
-        "artifacts/information_models/dp_meetdata.schema.linkml.yml" \
+    python -m linkml_asciidoc_generator.main \
+        "artifacts/information_models/schema.linkml.yml" \
         "artifacts/documentation/modules/schema"
     echo "- modules/schema/nav.adoc" >> artifacts/documentation/antora.yml
     @echo "… OK."
@@ -260,7 +260,7 @@ generate-example-data: _post-process-linkml-schema
     mkdir -p "artifacts/examples"
     for example_file in examples/*.yml; do \
         [ -f "$example_file" ] || continue; \
-        poetry run gen-linkml-profile  \
+        gen-linkml-profile  \
             convert \
             "$example_file" \
             --out "artifacts/${example_file%.*}.json"; \
@@ -276,13 +276,13 @@ generate-json-schema: _post-process-linkml-schema
     @echo "Generating JSON Schema…"
     @echo
     mkdir -p "artifacts/schemas/json_schema"
-    poetry run gen-json-schema \
+    gen-json-schema \
         --not-closed \
-        "artifacts/information_models/dp_meetdata.schema.linkml.yml" \
-        > "artifacts/schemas/json_schema/dp_meetdata.json_schema.json"
+        "artifacts/information_models/schema.linkml.yml" \
+        > "artifacts/schemas/json_schema/json_schema.json"
     @echo "… OK."
     @echo
-    @echo "Generated JSON Schema at: artifacts/schemas/json_schema/dp_meetdata.json_schema.json"
+    @echo "Generated JSON Schema at: artifacts/schemas/json_schema/json_schema.json"
     @echo
 
 # Validate example data
@@ -292,7 +292,7 @@ validate-example-data: generate-json-schema generate-example-data
     @echo
     for example_file in artifacts/examples/*.json; do \
         [ -f "$example_file" ] || continue; \
-        poetry run check-jsonschema --schemafile "artifacts/schemas/json_schema/dp_meetdata.json_schema.json" $example_file; \
+        check-jsonschema --schemafile "artifacts/schemas/json_schema/json_schema.json" $example_file; \
     done
     @echo "… OK."
     @echo

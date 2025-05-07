@@ -179,7 +179,7 @@ classes:
       kind:
         required: true
         range: ServiceCategoryKindCode
-  NonConformity_TroubleTicket
+  NonConformity_TroubleTicket:
     attributes:
       dateTimeOfReport:
         required: true
