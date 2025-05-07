@@ -1,0 +1,172 @@
+= Netburen
+
+This data product for EnergyHubs describes which information and data to
+exchange between DSO and customer/advisor when establishing an EnergyHub. A
+minimum set of data is defined that all operators are expected to conform to,
+along with a number of optional properties and data types.
+
+.Data Product
+[d2,svg,theme=4]
+----
+grid-rows: 3
+grid-columns: 3
+
+horizontal-gap: 160
+vertical-gap: 80
+
+vars: {
+  d2-config: {
+    pad: 20
+  }
+}
+
+TopologyDataSet.class: dataset
+Substation.class: grid
+Bay.class: grid
+
+1.class: empty
+Location.class: enterprise
+EnergyConsumer.class: grid
+
+2.class: empty
+3.class: empty
+MarketEvaluationPoint.class: market
+
+TopologyDataSet -> Substation: "substations"
+Substation -> Bay: "bays"
+Bay -> EnergyConsumer: "energy_consumers"
+EnergyConsumer -> MarketEvaluationPoint: "market_evaluation_points"
+EnergyConsumer -> Location: "location"
+Substation -> Location: "location"
+
+classes: {
+  empty: {
+    label: ""
+    style: {
+      fill: transparent
+      stroke: transparent
+    }
+  }
+  grid: {
+    style: {
+      fill: "#eccfcb"
+      shadow: true
+    }
+  }
+  enterprise: {
+    style: {
+      fill: "#d1e7c2"
+      shadow: true
+    }
+  }
+  market: {
+    style: {
+      fill: "#fffbef"
+      shadow: true
+    }
+  }
+}
+
+legend: "" {
+  style: {
+    fill: transparent
+    stroke: transparent
+  }
+  grid-rows: 3
+  grid-columns: 2
+  grid-gap: 10
+  near: bottom-right
+  iec61968_color: "" {
+    style: {
+      fill: "#d1e7c2"
+      stroke: black
+      stroke-width: 1
+    }
+    width: 10
+    height: 10
+  }
+  iec61968_text: "IEC61968 (Enterprise)" {
+    shape: text
+  }
+  iec61970_color: "" {
+    style: {
+      fill: "#eccfcb"
+      stroke: black
+      stroke-width: 1
+    }
+    width: 10
+    height: 10
+  }
+  iec61970_text: "IEC61970 (Grid)" {
+    shape: text
+  }
+  iec62325_color: "" {
+    style: {
+      fill: "#fffbef"
+      stroke: black
+      stroke-width: 1
+    }
+    width: 10
+    height: 10
+  }
+  iec62325_text: "IEC62325 (Market)" {
+    shape: text
+  }
+}
+
+classes: {
+  empty: {
+    label: ""
+    style: {
+      fill: transparent
+      stroke: transparent
+    }
+  }
+  grid: {
+    style: {
+      fill: "#eccfcb"
+      shadow: true
+    }
+  }
+  enterprise: {
+    style: {
+      fill: "#d1e7c2"
+      shadow: true
+    }
+  }
+  market: {
+    style: {
+      fill: "#fffbef"
+      shadow: true
+    }
+  }
+  dataset: {
+    style: {
+      shadow: true
+    }
+  }
+}
+----
+
+The data is intended to be presented as a hierarchy with a
+xref:schema:class/TopologyDataSet.adoc[`TopologyDataSet`] at its root, then
+xref:schema:class/Substation.adoc[`Substation`]s nested inside the
+TopologyDataSet. A grid connection (*Aansluiting*) is defined as a
+xref:schema:class/MarketEvaluationPoint.adoc[`MarketEvaluationPoint`] and
+related to a xref:schema:class/Bay.adoc[`Bay`] through
+xref:schema:class/EnergyConsumer.adoc[`EnergyConsumer`].
+
+Note that this data product does not take into account usage points, i.e.
+"overdrachtspunten". If an "aansluiting" contains multiple "overdrachtspunten",
+the following applies:
+
+* if all "overdrachtspunten" associated with the "aansluiting" are fed
+from the same `Bay`, only one `MarketEvaluationPoint` is provided;
+* if an "aansluiting" contains multiple "overdrachtspunten" which are fed
+from separate ``Bay``s, the `MarketEvaluationPoint` is associated with multiple
+``Bay``s, i.e. duplicated across multiple ``EnergyConsumer``s.
+
+== Additional schemas
+
+* xref:schema:attachment$schemas/json_schema/dp_netburen.json_schema.json[JSON schema]
+* xref:schema:attachment$examples/dp_netburen.example.json[Example JSON instance data]
