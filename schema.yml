@@ -1,0 +1,219 @@
+name: partners-in-energie
+description: |-
+  Trouble ticket api.
+title: Partners in energie
+id: https://www.edsn.nl/partnersinenergie
+license: https://www.apache.org/licenses/LICENSE-2.0.txt
+imports:
+- linkml:types
+prefixes:
+  linkml: https://w3id.org/linkml/
+  cim: https://cim.ucaiug.io/ns#
+  dcat: http://www.w3.org/ns/dcat#
+  dct: http://purl.org/dc/terms/
+  github: https://github.com/
+  liander: http://data.liander.nl/markt/def#
+  nbnl: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
+  nl: http://iec.ch/TC57/CIM100-Netherlands#
+  owl: http://www.w3.org/2002/07/owl#
+  skos: http://www.w3.org/2004/02/skos/core#
+  this: https://www.edsn.nl/partnersinenergie/
+default_prefix: this
+types:
+  UUIDv4:
+    base: string
+    pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+    uri: this:uuidv4
+  TroubleCode:
+    base: string
+    pattern: ^.{1,255}$
+    uri: this:uuidv4
+  EAN18:
+    base: string
+    pattern: ^[0-9]{18}$
+    uri: schema:gtin13
+enums:
+  TicketStatusCode:
+    permissible_values:
+      SUBMITTED:
+        description: is aangemaakt
+      PENDING:
+      COMPLETED:
+      CLOSED:
+  TicketTypeCode:
+    permissible_values:
+      GASORELECTIRCITY:
+      NON_CONFORMITY:
+      OTHER:
+  TicketOriginCode:
+    permissible_values:
+      GRIDOPERATOR:
+      PARTNERSINENERGY:
+      TELEPHONE:
+      EMAIL:
+      CHAT:
+      UNKNOWN:
+  SystemOperatorNameCode:
+    permissible_values:
+      Liander:
+      Enexis:
+      Stedin:
+      Coteq:
+      Westlandinfra:
+      Rendo:
+  ServiceCategoryKindCode:
+    permissible_values:
+      023:
+        aliases:
+          - Electricity supply industry
+      027:
+        structered_aliases:
+          - literal_form: Gas supply industry
+            created_by: https://github.com/bartkl
+
+classes:
+  TroubleTicket:
+    tree_root: true
+    class_uri: cim:TroubleTicket
+    attributes:
+      category:
+        required: true
+        range: TroubleCode
+      dateTimeOfReport:
+        required: true
+        range: datetime
+      description:
+        required: true
+        range: string
+        pattern: ^.{0,2000}$
+      mRID:
+        required: true
+        range: UUIDv4
+      status:
+        required: true
+        range: TicketStatusCode
+      subCategory:
+        required: true
+        inlined: true
+        range: SubCategory
+      team_name:
+        range: string
+        pattern: ^.{1,255}$
+        required: false
+      title:
+        required: true
+        range: string
+        pattern: ^.{1,100}$
+      type:
+        required: true
+        range: TicketTypeCode
+      origin:
+        required: true
+        range: TicketOriginCode
+        slot_uri: this:TroubleTicket.origin
+      issuer:
+        required: true
+        inlined: true
+        range: Issuer
+      operator:
+        required: true
+        inlined: true
+        range: Operator
+      systemoperator:
+        required: true
+        range: SystemOperatorNameCode
+      MarketEvaluationPoint_UsagePoint:
+        required: false
+        inlined: true
+        range: MarketEvaluationPoint
+        minimum_cardinality: 0
+        maximum_cardinality: 2
+        slot_uri: this:TroubleTicket.marketEvaluationPoint
+      Attachment:
+        range: Attachment
+        inlined: true
+        multivalued: true
+        required: false
+      NonConformity:
+        required: false
+        inlined: true
+        range: NonConformity_TroubleTicket
+  MarketEvaluationPoint:
+    attributes:
+      mRID:
+        required: true
+        range: EAN18
+      ServiceCategory:
+        required: true
+        range: ServiceCategory
+  Issuer:
+    attributes:
+      name:
+        required: true
+        range: string
+  Operator:
+    attributes:
+      name:
+        required: true
+        range: string
+  Attachment:
+    attributes:
+      filePath:
+        required: true
+        range: string
+        pattern: ^.{1,2000}$
+      fileName:
+        required: true
+        range: string
+        pattern: ^.{1,255}$
+      fileSizeQuantity: 
+        required: true
+        range: integer
+      contentTypeCode:
+        required: true
+        range: string
+        examples:
+          - value: application/pdf
+  ServiceCategory:
+    attributes:
+      kind:
+        required: true
+        range: ServiceCategoryKindCode
+  NonConformity_TroubleTicket
+    attributes:
+      dateTimeOfReport:
+        required: true
+        range: datetime
+      ServiceLocation:
+        required: true
+        inlined: true
+        range: ServiceLocation
+      NonConformity_Properties:
+        required: false
+        inlined: true
+        range: Property
+        multivalued: true
+  ServiceLocation:
+    attributes:
+      location_name:
+        required: false
+        range: string
+        pattern: ^.{1,100}$        
+      measurementField_name:
+        required: true
+        range: string
+        pattern: ^.{1,100}$
+      MarketEvaluationPoint_UsagePoint:
+        required: true
+        inlined: true
+        range: MarketEvaluationPoint      
+  Property:
+    attributes:
+      rejectionCategory_type:
+        required: true
+        range: string
+        pattern: ^.{1,255}$        
+      rejectionReason_description:
+        required: true
+        range: string
+        pattern: ^.{1,255}$  
