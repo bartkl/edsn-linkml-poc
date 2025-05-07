@@ -3,8 +3,6 @@
 set shell := ["bash", "-uc"]
 set windows-shell := ["bash", "-uc"]
 
-
-
 ref_name := "git rev-parse --abbrev-ref HEAD"
 major_branch_name := "git rev-parse --abbrev-ref HEAD | cut -d . -f 1"
 
@@ -23,6 +21,9 @@ build: clean _post-process-linkml-schema generate-json-schema generate-documenta
     @echo "… OK."
     @echo
     @echo "All project artifacts have been generated and post-processed, and can found in: artifacts/"
+    @echo
+    antora antora-playbook.yml
+    @echo "Website has been built at: docs/"
     @echo
 
 # Clean up the output directory
@@ -50,14 +51,14 @@ initialize:
     echo "Creating and configuring repository on GitHub…"
     echo
 
-    gh repo create Netbeheer-Nederland/dp-meetdata \
+    gh repo create bartkl/edsn-linkml-poc \
         --description "Information models for the Meetdata data product." \
         --public \
         --disable-wiki
 
     git init -b main
 
-    git remote add origin git@github.com:Netbeheer-Nederland/dp-meetdata.git
+    git remote add origin git@github.com:bartkl/edsn-linkml-poc.git
     git fetch
 
     git add .
@@ -87,7 +88,7 @@ initialize:
     git checkout -b v0
     git push -u origin v0
 
-    gh repo edit Netbeheer-Nederland/dp-meetdata --default-branch v0
+    gh repo edit bartkl/edsn-linkml-poc --default-branch v0
     git branch -D main
     git push --delete origin main
 
@@ -100,7 +101,7 @@ initialize:
     #    --method POST \
     #    -H "Accept: application/vnd.github+json" \
     #    -H "X-GitHub-Api-Version: 2022-11-28" \
-    #    /repos/Netbeheer-Nederland/$(basename `git config --get remote.origin.url` | cut -d . -f -1)/rulesets \
+    #    /repos/bartkl/$(basename `git config --get remote.origin.url` | cut -d . -f -1)/rulesets \
     #    --input ".github/rulesets/protect-docs-branches.json"
     #@echo "… OK."
     #@echo
@@ -112,7 +113,7 @@ initialize:
         --method POST \
         -H "Accept: application/vnd.github+json" \
         -H "X-GitHub-Api-Version: 2022-11-28" \
-        /repos/Netbeheer-Nederland/$(basename `git config --get remote.origin.url` | cut -d . -f -1)/rulesets \
+        /repos/bartkl/$(basename `git config --get remote.origin.url` | cut -d . -f -1)/rulesets \
         --input ".github/rulesets/protect-major-branches.json"
 
     # Set workflow permissions
@@ -121,12 +122,12 @@ initialize:
     #  --method PUT \
     #  -H "Accept: application/vnd.github+json" \
     #  -H "X-GitHub-Api-Version: 2022-11-28" \
-    #  /repos/Netbeheer-Nederland/dp-meetdata/actions/permissions \
+    #  /repos/bartkl/edsn-linkml-poc/actions/permissions \
     #   -F "enabled=true" -f "allowed_actions=all"
 
     echo "… OK."
     echo
-    echo "A GitHub repository has been created and configured at: https://github.com/Netbeheer-Nederland/dp-meetdata"
+    echo "A GitHub repository has been created and configured at: https://github.com/bartkl/edsn-linkml-poc"
     echo
 
 
@@ -297,3 +298,10 @@ validate-example-data: generate-json-schema generate-example-data
     @echo "… OK."
     @echo
 
+# Serve website
+[group("project")]
+serve-documentation:
+    @echo "Building project…"
+    @echo
+    npx http-serve docs/
+    @echo
