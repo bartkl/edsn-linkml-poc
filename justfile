@@ -303,5 +303,5 @@ validate-example-data: generate-json-schema generate-example-data
 serve-documentation:
     @echo "Building project…"
     @echo
-    npx http-serve docs/
+    http-serve docs/
     @echo
