@@ -36,40 +36,56 @@ enums:
   TicketStatusCode:
     permissible_values:
       SUBMITTED:
-        description: is aangemaakt
+        description: aangemaakt
       PENDING:
+        description: in behandeling
       COMPLETED:
+        description: afgerond
       CLOSED:
+        description: gesloten
   TicketTypeCode:
     permissible_values:
       GASORELECTIRCITY:
+        description: gas of elektriciteit
       NON_CONFORMITY:
+        description: niet-conformerend
       OTHER:
+        description: overig
   TicketOriginCode:
     permissible_values:
       GRIDOPERATOR:
+        description: netbeheerder
       PARTNERSINENERGY:
+        description: Partners in Energie
       TELEPHONE:
+        description: telefonisch
       EMAIL:
+        description: e-mail
       CHAT:
+        description: chat
       UNKNOWN:
+        description: onbekend
   SystemOperatorNameCode:
     permissible_values:
-      Liander:
-      Enexis:
-      Stedin:
-      Coteq:
-      Westlandinfra:
-      Rendo:
+      Liander: {}
+      Enexis: {}
+      Stedin: {}
+      Coteq: {}
+      Westlandinfra: {}
+      Rendo: {}
   ServiceCategoryKindCode:
     permissible_values:
-      023:
-        aliases:
-          - Electricity supply industry
-      027:
-        structered_aliases:
-          - literal_form: Gas supply industry
-            created_by: https://github.com/bartkl
+      #023:
+      #  aliases:
+      #    - Electricity supply industry
+      "023":
+        description: Electricity supply industry
+      "027":
+        description: Gas supply industry
+      #027: 
+        #structered_aliases:
+        #  - literal_form: Gas supply industry
+        #    created_by: https://github.com/bartkl
 
 classes:
   TroubleTicket:
