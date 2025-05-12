@@ -11,6 +11,9 @@ permissions:
 
 jobs:
   build:
+    defaults:
+      run:
+        shell: bash
     runs-on: ubuntu-latest
     container: bartkl/nbnl-env
     steps:
@@ -25,7 +28,7 @@ jobs:
           NEW_VERSION=$(echo v$NEW_MAJOR.0.0)
 
           git config user.name "CICD"
-          git config user.email "cicd@netbeheernederland.nl"
+          git config user.email "cicd@edsn.nl"
 
           git checkout -b v$NEW_MAJOR
           git tag $NEW_VERSION
