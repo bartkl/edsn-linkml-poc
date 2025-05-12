@@ -1,0 +1,155 @@
+= `MarketEvaluationPoint`
+:toclevels: 4
+
+
+
+[cols="h,3",width=65%]
+|===
+| Type
+| Class
+
+
+
+
+|===
+
+== Class hierarchy
+* *`MarketEvaluationPoint`*
+
+
+== Slots
+
+
+
+.Associated classes
+[d2,svg,theme=4]
+----
+vars: {
+  d2-config: {
+    pad: 20
+  }
+}
+MarketEvaluationPoint {
+  style {
+    fill: "#cccccc"
+    shadow: true
+  }
+}
+
+
+
+ServiceCategory {
+  style {
+    fill: "#cccccc"
+    shadow: true
+  }
+}
+
+
+
+
+MarketEvaluationPoint -> ServiceCategory: ServiceCategory
+
+
+legend: "" {
+  style: {
+    fill: transparent
+    stroke: transparent
+  }
+  grid-rows: 3
+  grid-columns: 2
+  grid-gap: 10
+  near: bottom-right
+  iec61968_color: "" {
+    style: {
+      fill: "#d1e7c2"
+      stroke: black
+      stroke-width: 1
+    }
+    width: 10
+    height: 10
+  }
+  iec61968_text: "IEC61968 (Enterprise)" {
+    shape: text
+  }
+  iec61970_color: "" {
+    style: {
+      fill: "#eccfcb"
+      stroke: black
+      stroke-width: 1
+    }
+    width: 10
+    height: 10
+  }
+  iec61970_text: "IEC61970 (Grid)" {
+    shape: text
+  }
+  iec62325_color: "" {
+    style: {
+      fill: "#fffbef"
+      stroke: black
+      stroke-width: 1
+    }
+    width: 10
+    height: 10
+  }
+  iec62325_text: "IEC62325 (Market)" {
+    shape: text
+  }
+}
+----
+
+
+[cols="3,1,3,6",width=100%]
+|===
+| Name | Cardinality | Type | Description
+
+| <<ServiceCategory,`ServiceCategory`>>
+| 1..*
+| xref::class/ServiceCategory.adoc[`ServiceCategory`]
+| n/a
+
+| <<mRID,`mRID`>>
+| 1..*
+| xref::enumeration/EAN18.adoc[`EAN18`]
+| n/a
+|===
+
+'''
+
+
+//[discrete]
+[#mRID]
+=== `mRID`
+
+
+[cols="h,4",width=65%]
+|===
+| URI
+| n/a
+| Cardinality
+| 1..*
+| Type
+| xref::enumeration/EAN18.adoc[`EAN18`]
+
+
+|===
+
+//[discrete]
+[#ServiceCategory]
+=== `ServiceCategory`
+
+
+[cols="h,4",width=65%]
+|===
+| URI
+| n/a
+| Cardinality
+| 1..*
+| Type
+| xref::class/ServiceCategory.adoc[`ServiceCategory`]
+
+
+|===
+
+
