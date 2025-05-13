@@ -3,8 +3,8 @@ site:
   url: https://bartkl.github.io/edsn-linkml-poc
 content:
   sources:
-  - url: .
-    start_path: ./artifacts/documentation
+  - url: ./docs-src
+    start_paths: [v*]
 asciidoc:
   attributes:
     page-pagination: ''

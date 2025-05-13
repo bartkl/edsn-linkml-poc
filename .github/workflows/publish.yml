@@ -25,6 +25,10 @@ jobs:
           node-version: '18'
       - name: Install Antora 3.1.10
         run: npm i antora@3.1.10
+      - name: Fetch site content
+        run: |
+          git fetch && git fetch --tags
+          git checkout docs -- docs-src
       - name: Generate site
         run: npx antora antora-playbook.yml
       - name: Upload artifacts
