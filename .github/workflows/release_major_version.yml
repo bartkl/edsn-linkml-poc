@@ -2,10 +2,6 @@ name: Release new major version
 on:
   workflow_dispatch:
 
-defaults:
-  run:
-    shell: bash
-
 permissions:
   contents: write
 
@@ -16,11 +12,14 @@ jobs:
         shell: bash
     runs-on: ubuntu-latest
     container: bartkl/nbnl-env
+    ports:
+      - 8080
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Tag version
         run: |
+          git config --global --add safe.directory /__w/edsn-linkml-poc/edsn-linkml-poc
           git fetch && git fetch --tags
 
           LATEST_MAJOR=$(echo ${{ github.ref_name }} | cut -c 2- | cut -d . -f 1)
