@@ -12,8 +12,8 @@ jobs:
         shell: bash
     runs-on: ubuntu-latest
     container: bartkl/nbnl-env
-    ports:
-      - 8080
+      ports:
+        - 8080
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
