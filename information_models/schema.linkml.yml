@@ -1,7 +1,7 @@
 name: partners-in-energie
 description: |-
   Trouble ticket api.
-title: Partners in energie
+title: Partners in Energie
 id: https://www.edsn.nl/partnersinenergie
 license: https://www.apache.org/licenses/LICENSE-2.0.txt
 imports:
