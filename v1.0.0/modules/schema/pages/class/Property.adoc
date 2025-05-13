@@ -1,0 +1,77 @@
+= `Property`
+:toclevels: 4
+
+
+
+[cols="h,3",width=65%]
+|===
+| Type
+| Class
+
+
+
+
+|===
+
+== Class hierarchy
+* *`Property`*
+
+
+== Slots
+
+
+
+
+[cols="3,1,3,6",width=100%]
+|===
+| Name | Cardinality | Type | Description
+
+| <<rejectionCategory_type,`rejectionCategory_type`>>
+| 1..*
+| https://w3id.org/linkml/String[`string`]
+| n/a
+
+| <<rejectionReason_description,`rejectionReason_description`>>
+| 1..*
+| https://w3id.org/linkml/String[`string`]
+| n/a
+|===
+
+'''
+
+
+//[discrete]
+[#rejectionCategory_type]
+=== `rejectionCategory_type`
+
+
+[cols="h,4",width=65%]
+|===
+| URI
+| n/a
+| Cardinality
+| 1..*
+| Type
+| https://w3id.org/linkml/String[`string`]
+
+
+|===
+
+//[discrete]
+[#rejectionReason_description]
+=== `rejectionReason_description`
+
+
+[cols="h,4",width=65%]
+|===
+| URI
+| n/a
+| Cardinality
+| 1..*
+| Type
+| https://w3id.org/linkml/String[`string`]
+
+
+|===
+
+

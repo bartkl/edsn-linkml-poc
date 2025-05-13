@@ -1,0 +1,48 @@
+= `TicketOriginCode`
+:toclevels: 4
+
+
+
+[cols="h,3",width=65%]
+|===
+| Type
+| Enumeration
+
+
+| CIM standard (perspective)
+| IEC61970 (Grid)
+
+
+
+|===
+
+== Values
+
+[cols="1,1,5",width=100%]
+|===
+| Value | URI | Description
+
+| `CHAT`
+| n/a
+| n/a
+
+| `EMAIL`
+| n/a
+| n/a
+
+| `GRIDOPERATOR`
+| n/a
+| n/a
+
+| `PARTNERSINENERGY`
+| n/a
+| n/a
+
+| `TELEPHONE`
+| n/a
+| n/a
+
+| `UNKNOWN`
+| n/a
+| n/a
+|===
