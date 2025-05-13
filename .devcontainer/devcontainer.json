@@ -1,0 +1,11 @@
+{
+  "name": "NBNL Dev Container",
+  "image": "bartkl/nbnl-env:latest",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "asciidoctor.asciidoctor-vscode"
+      ]
+    }
+  }
+}
