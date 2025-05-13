@@ -29,7 +29,9 @@ jobs:
         run: |
           git fetch && git fetch --tags
           git branch docs origin/docs
-          git checkout docs -- docs-src
+          git worktree add /tmp/docs docs
+          mkdir docs-src
+          cp -r /tmp/docs/* docs-src/
       - name: Generate site
         run: npx antora antora-playbook.yml
       - name: Upload artifacts
