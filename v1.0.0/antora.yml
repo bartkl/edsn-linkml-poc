@@ -1,6 +1,0 @@
-name: pie-poc
-version: v1.0.0
-title: Partners in Energie
-nav:
-- modules/ROOT/nav.adoc
-- modules/schema/nav.adoc
