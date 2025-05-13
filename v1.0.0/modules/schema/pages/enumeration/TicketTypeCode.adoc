@@ -1,0 +1,36 @@
+= `TicketTypeCode`
+:toclevels: 4
+
+
+
+[cols="h,3",width=65%]
+|===
+| Type
+| Enumeration
+
+
+| CIM standard (perspective)
+| IEC61970 (Grid)
+
+
+
+|===
+
+== Values
+
+[cols="1,1,5",width=100%]
+|===
+| Value | URI | Description
+
+| `GASORELECTIRCITY`
+| n/a
+| n/a
+
+| `NON_CONFORMITY`
+| n/a
+| n/a
+
+| `OTHER`
+| n/a
+| n/a
+|===

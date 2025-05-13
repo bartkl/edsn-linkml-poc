@@ -1,0 +1,189 @@
+= `NonConformity_TroubleTicket`
+:toclevels: 4
+
+
+
+[cols="h,3",width=65%]
+|===
+| Type
+| Class
+
+
+
+
+|===
+
+== Class hierarchy
+* *`NonConformity_TroubleTicket`*
+
+
+== Slots
+
+
+
+.Associated classes
+[d2,svg,theme=4]
+----
+vars: {
+  d2-config: {
+    pad: 20
+  }
+}
+NonConformity_TroubleTicket {
+  style {
+    fill: "#cccccc"
+    shadow: true
+  }
+}
+
+
+
+ServiceLocation {
+  style {
+    fill: "#cccccc"
+    shadow: true
+  }
+}
+
+
+
+Property {
+  style {
+    fill: "#cccccc"
+    shadow: true
+  }
+}
+
+
+
+
+NonConformity_TroubleTicket -> ServiceLocation: ServiceLocation
+
+
+NonConformity_TroubleTicket -> Property: NonConformity_Properties
+
+
+legend: "" {
+  style: {
+    fill: transparent
+    stroke: transparent
+  }
+  grid-rows: 3
+  grid-columns: 2
+  grid-gap: 10
+  near: bottom-right
+  iec61968_color: "" {
+    style: {
+      fill: "#d1e7c2"
+      stroke: black
+      stroke-width: 1
+    }
+    width: 10
+    height: 10
+  }
+  iec61968_text: "IEC61968 (Enterprise)" {
+    shape: text
+  }
+  iec61970_color: "" {
+    style: {
+      fill: "#eccfcb"
+      stroke: black
+      stroke-width: 1
+    }
+    width: 10
+    height: 10
+  }
+  iec61970_text: "IEC61970 (Grid)" {
+    shape: text
+  }
+  iec62325_color: "" {
+    style: {
+      fill: "#fffbef"
+      stroke: black
+      stroke-width: 1
+    }
+    width: 10
+    height: 10
+  }
+  iec62325_text: "IEC62325 (Market)" {
+    shape: text
+  }
+}
+----
+
+
+[cols="3,1,3,6",width=100%]
+|===
+| Name | Cardinality | Type | Description
+
+| <<ServiceLocation,`ServiceLocation`>>
+| 1..*
+| xref::class/ServiceLocation.adoc[`ServiceLocation`]
+| n/a
+
+| <<dateTimeOfReport,`dateTimeOfReport`>>
+| 1..*
+| https://w3id.org/linkml/Datetime[`datetime`]
+| n/a
+
+| <<NonConformity_Properties,`NonConformity_Properties`>>
+| 0..*
+| xref::class/Property.adoc[`Property`]
+| n/a
+|===
+
+'''
+
+
+//[discrete]
+[#dateTimeOfReport]
+=== `dateTimeOfReport`
+
+
+[cols="h,4",width=65%]
+|===
+| URI
+| n/a
+| Cardinality
+| 1..*
+| Type
+| https://w3id.org/linkml/Datetime[`datetime`]
+
+
+|===
+
+//[discrete]
+[#NonConformity_Properties]
+=== `NonConformity_Properties`
+
+
+[cols="h,4",width=65%]
+|===
+| URI
+| n/a
+| Cardinality
+| 0..*
+| Type
+| xref::class/Property.adoc[`Property`]
+
+
+|===
+
+//[discrete]
+[#ServiceLocation]
+=== `ServiceLocation`
+
+
+[cols="h,4",width=65%]
+|===
+| URI
+| n/a
+| Cardinality
+| 1..*
+| Type
+| xref::class/ServiceLocation.adoc[`ServiceLocation`]
+
+
+|===
+
+
