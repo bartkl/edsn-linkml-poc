@@ -20,10 +20,7 @@ build: clean _post-process-linkml-schema generate-json-schema generate-documenta
     cp -r "artifacts/examples" "artifacts/documentation/modules/schema/attachments/"
     @echo "… OK."
     @echo
-    @echo "All project artifacts have been generated and post-processed, and can found in: artifacts/"
-    @echo
-    antora antora-playbook.yml
-    @echo "Website has been built at: docs/"
+    @echo "All project artifacts have been generated and post-processed, and can be found in: artifacts/"
     @echo
 
 # Clean up the output directory
