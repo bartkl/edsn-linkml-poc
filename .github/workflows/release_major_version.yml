@@ -40,7 +40,7 @@ jobs:
       - name: Commit artifacts to `docs` branch
         run: |
           git fetch
-          git checkout docs
+          git switch docs
 
           if [ -d "${{ env.NEW_VERSION }}" ]; then
               exit 1  # Versions are set in stone.
