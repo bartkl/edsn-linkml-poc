@@ -11,7 +11,8 @@ jobs:
       run:
         shell: bash
     runs-on: ubuntu-latest
-    container: bartkl/nbnl-env
+    container:
+      image: bartkl/nbnl-env
       ports:
         - 8080
     steps:
