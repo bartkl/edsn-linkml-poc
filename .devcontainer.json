@@ -1,0 +1,14 @@
+{
+  "name": "NBNL Dev Container",
+  "dockerComposeFile": ["compose.yml"],
+  "service": "linkml",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "forwardPorts": [8080],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "asciidoctor.asciidoctor-vscode"
+      ]
+    }
+  }
+}

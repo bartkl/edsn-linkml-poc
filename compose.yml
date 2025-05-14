@@ -1,0 +1,18 @@
+services:
+  linkml:
+    build:
+      context: .
+      dockerfile: Dockerfile.linkml
+    command: sleep infinity
+    volumes:
+      - ..:/workspaces:cached
+  antora:
+    build:
+      context: .
+      dockerfile: Dockerfile.antora
+    command: sleep infinity
+    volumes:
+      - ..:/workspaces:cached
+    ports:
+      - "8080:8080"
+      - "22:22"

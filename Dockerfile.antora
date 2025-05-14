@@ -1,0 +1,22 @@
+FROM node:18
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV RUNNING_IN_DOCKER=true
+ENV NODE_PATH=/usr/lib/node_modules
+
+EXPOSE 8080
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gnupg ca-certificates \
+    vim
+
+# Install Antora and its dependencies
+RUN npm i -g \
+    @antora/cli@3.1.9 \
+    @antora/site-generator@3.1.9 \
+    @antora/lunr-extension@^1.0.0-alpha.8 \
+    @mermaid-js/mermaid-cli@^11.4.2 \
+    asciidoctor-kroki@^0.18.1 \
+    http-serve@1.0.1 \
+    @djencks/asciidoctor-mathjax@^0.0.9
