@@ -1,6 +1,9 @@
 {
   "name": "NBNL Dev Container",
-  "image": "bartkl/nbnl-env:latest",
+  "build": {
+    "dockerfile": "Dockerfile.dev"
+  },
+  "remoteUser": "devuser",
   "customizations": {
     "vscode": {
       "extensions": [
