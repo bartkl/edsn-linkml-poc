@@ -233,3 +233,4 @@ classes:
         required: true
         range: string
         pattern: ^.{1,255}$  
+  SubCategory:
